@@ -1,0 +1,149 @@
+@import url('vars.css');
+@import url('./imports/helpers.css');
+@import url('./imports/resets.css');
+
+@import url('./imports/entry.css');
+
+:root {
+    --color-primary: #181818;
+    --color-secondary: #212121;
+    --color-border: hsla(0, 0%, 53.3%, 0.4);
+}
+
+body {
+    overflow: hidden;
+}
+
+header {
+    height: 50px;
+}
+
+main {
+    display: grid;
+    grid-template-areas: "aside toolbar" "aside section";
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: 50px 1fr;
+    height: calc(100% - 50px);
+}
+
+aside {
+    grid-area: aside;
+    border-right: 1px solid var(--color-border);
+    width: 200px;
+    overflow-y: auto;
+}
+
+section {
+    padding: 20px;
+    display: grid;
+    height: 100%;
+    column-gap: 20px;
+    grid-area: section;
+    grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+    overflow-y: auto;
+}
+
+section.collection {
+    grid-template-columns: repeat(auto-fit, minmax(225px, minmax(1fr, 420px)));
+}
+
+#toolbar {
+    grid-area: toolbar;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    padding: 0 25px;
+    border-bottom: 1px solid var(--color-border);
+    flex-direction: row-reverse;
+}
+
+aside ul {
+    margin: 0; padding: 0;
+    list-style: none;
+}
+
+aside ul li {
+    padding: 0px 10px;
+    white-space: pre;
+    word-break: keep-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+aside ul li a,
+.modal-container a {
+    color: rgb(170,170,170) !important;
+    cursor: pointer;
+}
+
+aside ul li a:hover,
+aside ul li a:active,
+aside ul li a:focus {
+    color: snow !important;
+}
+
+label.i-search input {
+    padding-right: 20px;
+}
+label.i-search::after {
+    content: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="15" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="5" /><line x1="60" y1="60" x2="75" y2="75" stroke="rgba(255,255,255,0.6)" stroke-width="5" /></svg>');
+    position: absolute;
+    height: 25px; width: 25px;
+    user-select: none;
+    right: 0;
+}
+
+#query {
+    padding: 10px 5px;
+    position: sticky;
+    top: 0;
+    background-color: inherit;
+    border-bottom: 1px solid var(--color-border);
+}
+
+#loadMore {
+    display: flex;
+    grid-column: 1 / -1;
+    align-items: center;
+    justify-content: center;
+}
+
+#contextmenu-aside {
+    display: none;
+    position: absolute;
+}
+
+#contextmenu-aside.active {
+    display: block;
+}
+
+#dropdown-video-category {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    position: relative;
+}
+
+#dropdown-video-category .menu {
+    left: unset;
+}
+
+.modal-template {
+    display: flex;
+    opacity: 1;
+    z-index: 400;
+}
+.modal-template .modal-container {
+    animation: slide-down .2s ease 1;
+    z-index: 1;
+}
+.modal-template .modal-overlay {
+    background: rgba(247,248,249,.75);
+    bottom: 0;
+    cursor: default;
+    display: block;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}

@@ -1,0 +1,150 @@
+.entry-container.theatre {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(0,0,0,0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.entry-container.theatre .entry {
+    margin-top: -25px;
+    height: 75vh;
+
+    grid-template-rows: 75vh 100px;
+}
+
+.entry-container.theatre .details {
+    padding-left: 25px;
+}
+.entry-container.theatre .details h3,
+.entry-container.theatre .details .byline,
+.entry-container.theatre .details .metadata {
+    width: max-content;
+}
+
+.entry-container.theatre .actions {
+    right : 25px;
+}
+
+.entry {
+    display: grid;
+    grid-template-rows: 225px 100px;
+    grid-template-areas: "figure" "details";
+    width: 100%; height: 100%;
+
+}
+
+.entry-container:not(.theatre) .entry figure:hover {
+  transition: all 0.3s ease-in-out;
+  filter: opacity(0.75);
+}
+
+.entry.collection h3 {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.entry.collection .thumbnails {
+    background-color: #0e0e0e;
+    grid-area: figure;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    cursor: pointer;
+    transition: var(--shadow-transition_-_transition);
+}
+
+.entry.collection .thumbnails:hover {
+  box-shadow: var(--shadow-elevation-24dp_-_box-shadow);
+  filter: opacity(0.75);
+}
+.entry.collection .thumbnails img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+}
+
+.entry figure {
+    grid-area: figure;
+    width: 100%; height: 100%;
+    cursor: pointer;
+}
+
+.entry figure img {
+    transition: var(--shadow-transition_-_transition);
+    border-radius: 5px;
+    display: block;
+    width: 100%; height: 100%;
+}
+
+.entry figure img:hover {
+    box-shadow: var(--shadow-elevation-24dp_-_box-shadow);
+}
+
+.entry figure iframe {
+    width: 100%; height: 100%;
+}
+.entry .details {
+    grid-area: details;
+}
+
+.entry .details h3 {
+    margin: 0; padding: 0;
+    margin: 6px 0;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    color: snow;
+    cursor: default;
+}
+
+.entry .details .metadata,
+.entry a {
+    text-decoration: none;
+    color: rgb(170,170,170);
+}
+
+.entry .details .byline a:hover {
+    color: white;
+}
+
+.entry .details .metadata {
+    list-style: none;
+    margin: 0; padding: 0;
+}
+
+.entry .details .metadata li {
+    display: inline;
+    letter-spacing: 0.3px;
+    line-height: 18px;
+}
+
+.entry .details .metadata li:not(:first-child)::before {
+    content: "•";
+    margin: 0 4px;
+}
+
+.entry .actions {
+    position: absolute;
+    right: 0;
+    top: 45px;
+}
+
+.entry .actions button.bookmark {
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 0 22 22" width="20px"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" fill="none" stroke-width="2" stroke="rgb(170,170,170)"/></svg>') no-repeat center center !important;
+    background-size: cover !important;
+    display: inline-block;
+    width: 20px !important; height: 20px !important;
+    margin-top: -2px;
+}
+
+.entry .actions button.bookmark.bookmark-filled {
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 0 22 22" width="20px"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" fill="rgb(170,170,170)" stroke-width="0"/></svg>') no-repeat center center !important;
+}

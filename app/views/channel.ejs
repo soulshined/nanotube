@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NanoTube - <%= channelTitle %></title>
+    <script src="/js/channel.min.js" type="module"></script>
+    <link rel="stylesheet" href="/css/imports/spectre/spectre-exp.min.css">
+    <link rel="stylesheet" href="/css/imports/spectre/spectre-icons.min.css">
+    <link rel="stylesheet" href="/css/imports/spectre/spectre.min.css">
+    <link href="/css/channel.css" rel="stylesheet" />
+</head>
+
+<body>
+    <header>
+        <a id="homelink" href="/">nanotube</a>
+    </header>
+
+    <main>
+        <div id="toolbar">
+            <h1><%= channelTitle %><button class="btn btn-sm btn-link ml-2"><span class="text-error">Unsubscribe</span></button></h1>
+        </div>
+        <section id="<%= channelId %>"></section>
+
+        <div class="modal modal-sm" id="template-modal-input">
+            <a href="#" class="modal-overlay" aria-label="Close"></a>
+            <div class="modal-container">
+                <div class="modal-header">
+                    <a href="#" class="btn btn-clear float-right" aria-label="Close"></a>
+                    <div class="modal-title h5"></div>
+                </div>
+                <div class="modal-body">
+                    <div class="content">
+                        <form>
+                            <div class="form-group">
+                                <label class="form-label"></label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer"></div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

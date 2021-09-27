@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <title>NanoTube</title>
+    <link rel="stylesheet" href="/css/imports/spectre/spectre-exp.min.css">
+    <link rel="stylesheet" href="/css/imports/spectre/spectre-icons.min.css">
+    <link rel="stylesheet" href="/css/imports/spectre/spectre.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="js/main.min.js" type="module"></script>
+</head>
+
+<body id="nanotube">
+    <header><a id="homelink" href="/">nanotube</a>
+        <div class="dropdown dropdown-right">
+            <button id="menuBtn" class="btn btn-action btn-link dropdown-toggle">
+                <i class="icon icon-menu"></i>
+            </button>
+            <ul class="menu">
+                <li class="menu-item">Add Subscription</li>
+                <li class="menu-item">Add Collection</li>
+                <li class="menu-item">Settings</li>
+                <li class="divider" data-content="DATA"></li>
+                <li class="menu-item tooltip" data-tooltip="Export profile to json file">Export</li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <aside>
+            <div id="query"><label class="i-search p-relative"><input list="dl-channels"
+                        placeholder="Search"></input></label><datalist id="dl-channels"></datalist></div>
+            <ul></ul>
+        </aside>
+
+        <div id="toolbar">
+            <div id="todayFilterGroup" class="btn-group btn-group-block toggle-group">
+                <button class="btn btn-sm tooltip tooltip-left"
+                    data-tooltip="Show unwatched favorited channel videos only" value="favorites">Favorites</button>
+                <button class="btn btn-sm active tooltip tooltip-left" data-tooltip="Show all unwatched"
+                    value="all">All</button>
+            </div>
+
+            <div id="dropdown-video-category" class="dropdown">
+                <button class="btn btn-sm btn-link dropdown-toggle" tabindex="0">
+                    Today <i class="icon icon-caret"></i>
+                </button>
+                <ul class="menu">
+                    <li value="today" class="menu-item">Today</li>
+                    <li value="bookmarks" class="menu-item">Bookmarks</li>
+                    <li value="collections" class="menu-item">Collections</li>
+                </ul>
+            </div>
+
+            <div></div>
+        </div>
+
+        <section>
+            <div id="loadMore" class="empty text-gray" style="background: none">
+                <p class="empty-title h5">
+                    <button class="btn btn-link btn-lg loading" disabled></button>
+                </p>
+            </div>
+        </section>
+
+        <div id="contextmenu-aside">
+            <ul class="menu">
+                <li value="copyYoutubeLink" class="menu-item">Copy YouTube Link</li>
+            </ul>
+        </div>
+    </main>
+</body>
+
+</html>
