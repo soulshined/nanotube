@@ -10,6 +10,15 @@ class Utils {
     }
 
     static doVideoRequest(videoId) {
+        const url = new URL(videoId);
+        videoId = url.searchParams.get('v');
+
+        if (url.hostname === 'youtu.be')
+            videoId = url.pathname.substring(1);
+
+        if (videoId === null)
+            return Promise.reject(new Error("YouTube video search error: video id can't be found"));
+
         return new Promise((resolve, reject) => {
             const req = https.request(`https://www.youtube.com/watch?v=${videoId}`, res => {
                 let body = '';
@@ -28,7 +37,7 @@ class Utils {
             })
 
             req.on('error', error => {
-                console.log('YouTube Video Error:', error);
+                console.log('YouTube Video Search Error:', error);
                 reject(500);
             })
 
