@@ -72,7 +72,7 @@ class UpdateQueryBuilder {
     }
 
     set(field, value) {
-        this.expressions.push([field, '=', '?']);
+        this.expressions.push(`${field} = ?`);
         this.params.push(value);
         return this;
     }
@@ -85,7 +85,7 @@ class UpdateQueryBuilder {
     build() {
         const sql = [
             `UPDATE ${this.table} SET`,
-            ...this.expressions.map(expr => expr.join(", "))
+            this.expressions.join(", ")
         ]
         if (this.whereExpression) {
             const [expr, values] = this.whereExpression.build();
@@ -93,7 +93,6 @@ class UpdateQueryBuilder {
             this.params.push(...values);
         }
 
-        // console.log(sql.join(" "), this.params.flat(1));
         return [sql.join(" "), this.params.flat(1)];
     }
 
