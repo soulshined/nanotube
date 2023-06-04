@@ -34,7 +34,7 @@ class Feed {
 
     constructor(feed) {
         this.feed = feed;
-        this.channelId = feed['yt:channelId'][0];
+        this.channelId = feed.author[0].uri[0].substring(feed.author[0].uri[0].lastIndexOf('/channel/') + '/channel/'.length);
         this.channelPublishDate = new Date(feed.published[0])
         this.channelTitle = feed.title[0];
         this.author = feed.author[0].name[0];

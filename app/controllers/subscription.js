@@ -159,7 +159,12 @@ router.post('/:type/:channelId', async function (req, res, next) {
                 .column('channelId', 'channelTitle', 'channelPublishedDate')
                 .row(channelId, channelTitle, channelPublishDate)
             ).then(() => res.status(201).json({ channelId, channelTitle }))
-                .catch((err) => next(err));
+                .catch((err) => {
+                    if (err.toString().includes('UNIQUE constraint failed: Subscription.channelId')) {
+                        res.status(422).send('Subscription already exists');
+                    }
+                    next(err)
+                });
 
         })
         .catch((err) => next(err));

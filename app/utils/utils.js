@@ -28,7 +28,7 @@ class Utils {
 
                 res.on('end', () => {
                     if (!res || ![202, 200, 201].includes(res.statusCode)) {
-                        console.log('YouTube video non-ok response', res.statusCode, res.statusMessage);
+                        console.log(`YouTube video ${videoId} non-ok response`, res.statusCode, res.statusMessage);
                         reject(res.statusCode);
                     }
                     else resolve(body);
@@ -46,8 +46,11 @@ class Utils {
     }
 
     static doChannelRequest(channelType, channelId) {
+        const isHandle = channelType === 'handle';
+
         return new Promise((resolve, reject) => {
-            const req = https.request(`https://www.youtube.com/feeds/videos.xml?${channelType}=${channelId}`, res => {
+            const uri = `https://www.youtube.com/` + (isHandle ? channelId : `feeds/videos.xml?${channelType}=${channelId}`);
+            const req = https.request(uri, res => {
                 let body = '';
                 res.on('data', d => {
                     body += d;
@@ -58,7 +61,11 @@ class Utils {
                         console.log('YouTube XML non-ok response', res.statusCode, res.statusMessage);
                         reject(res.statusCode);
                     }
-                    else resolve(body);
+                    else {
+                        if (isHandle) {
+                            resolve(this.doChannelRequest('channel_id', body.match(/"browseId"\s*:\s*"([^"]+)"/)[1]));
+                        } else resolve(body);
+                    }
                 })
 
             })

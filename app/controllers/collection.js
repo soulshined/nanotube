@@ -1,3 +1,4 @@
+const { SelectBuilder } = require('html-tag-builder');
 const { TABLES } = require('../model/enum.js');
 const { Entry } = require('../model/feed/feed.js');
 const QueryBuilder = require('../model/query-builder.js');
@@ -49,7 +50,9 @@ router.get('/', function (req, res, next) {
         .catch((err) => next(err));
 })
 
-router.get('/:collectionId', function (req, res) {
+router.get('/:collectionId', async function (req, res, next) {
+    const collection = await db.getOne(QueryBuilder.select(TABLES.COLLECTION).where(QueryBuilder.where('id', '=', req.params.collectionId)));
+
     db.findAll(QueryBuilder.exec(`SELECT ca.*, v.*,
                                   CASE
                                     WHEN bm.videoId IS NOT NULL THEN '1'
@@ -59,11 +62,14 @@ router.get('/:collectionId', function (req, res) {
                                   JOIN Video v USING (videoId)
                                   LEFT OUTER JOIN Bookmark bm USING (videoId)
                                   WHERE ca.id = '${req.params.collectionId}'`))
-        .then(collection => res.status(200).json(collection.map(p => {
-            const entry = Entry.fromBookmark(p);
-            entry.collectionId = p.id;
-            return entry;
-        })))
+        .then(rs => res.status(200).json({
+            name: collection.name,
+            entries: rs.map(p => {
+                const entry = Entry.fromBookmark(p);
+                entry.collectionId = p.id;
+                return entry;
+            })
+        }))
         .catch((err) => next(err));
 })
 
