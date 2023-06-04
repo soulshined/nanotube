@@ -1,6 +1,6 @@
 {
     "name": "nanotube",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "Complete working youtube application. Subscribe to YouTube channels without an account. Save groups of videos without a YouTube account",
     "private": true,
     "main": "./app/index.js",
